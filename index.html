@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Envy Lashes — Worcester's premier lash studio. Expertly crafted eyelash extensions by VX.Alex. Classic, Hybrid, Volume & Lash Lift services.">
+    <title>Envy Lashes | Worcester's Premier Lash Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+
+        /* Hamburger menu animation */
+        #menu-toggle:checked ~ div .bar-top    { transform: translateY(8px) rotate(45deg); }
+        #menu-toggle:checked ~ div .bar-mid    { opacity: 0; transform: scaleX(0); }
+        #menu-toggle:checked ~ div .bar-bot    { transform: translateY(-8px) rotate(-45deg); }
+        .bar-top, .bar-mid, .bar-bot { transition: transform 0.3s ease, opacity 0.2s ease; transform-origin: center; }
+
+         :root {
+            --ink:    #1E1408;
+            --sand:   #DDD9C4;
+            --cream:  #E4D7B5;
+            --sky:    #CFE3F2;
+            --gold:   #F8E877;
+            --ink-dark: #140D05;
+        }
+
+        /* Scroll-reveal fade */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stat counter pulse */
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+        .stat-pulse { animation: gentle-pulse 3s ease-in-out infinite; }
+
+        /* Floating badge */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-badge { animation: float 4s ease-in-out infinite; }
+
+        /* Star shimmer */
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .star-shimmer { animation: shimmer 2s ease-in-out infinite; }
+
+        /* Subtle grain overlay */
+        .grain-overlay {
+            position: relative;
+        }
+        .grain-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900 antialiased">
+
+    <!-- ═══════════════════════════════════════════════════ HEADER -->
+    <header class="bg-white/95 backdrop-blur-md fixed w-full top-0 z-50 border-b border-gray-100 shadow-sm">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-8">
+
+            <!-- Logo -->
+            <a href="index.html" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tighter shrink-0 hover:opacity-80 transition-opacity">
+                VX.<span class="text-[#1E1408]">Alex</span>
+            </a>
+
+            <!-- Desktop nav -->
+            <div class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-slate-600">
+                <a href="index.html" class="text-[#1E1408]">Home</a>
+                <a href="index.html#reviews" class="hover-[#1E1408] transition-colors">Reviews</a>
+                <a href="mywork.html" class="hover-[#1E1408] transition-colors">My Work</a>
+                <a href="policies.html" class="hover-[#1E1408] transition-colors">Policies & Hours</a>
+                <a href="prices.html" class="px-5 py-2.5 bg-[#1E1408] text-white rounded-xl hover:bg-#140D05 transition-all font-bold">
+                    Book Now
+                </a>
+            </div>
+
+            <!-- Mobile hamburger toggle -->
+            <input type="checkbox" id="menu-toggle" class="hidden peer">
+            <label for="menu-toggle" class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-slate-50 rounded-xl transition-colors z-[70] relative">
+                <div class="flex flex-col gap-[6px] w-7">
+                    <span class="bar-top block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
+                    <span class="bar-mid block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
+                    <span class="bar-bot block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
+                </div>
+            </label>
+
+            <!-- Mobile drawer -->
+            <div class="fixed inset-y-0 right-0 w-[300px] bg-white shadow-2xl transition-transform duration-300 transform translate-x-full peer-checked:translate-x-0 lg:hidden z-[60] p-8 flex flex-col">
+                <div class="flex justify-end mb-10">
+                    <label for="menu-toggle" class="cursor-pointer p-2 text-slate-400 hover-[#1E1408] transition-colors">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </label>
+                </div>
+                <ul class="flex flex-col space-y-6 text-xl font-bold text-slate-800">
+                    <li><a href="index.html" class="text-[#1E1408] block">Home</a></li>
+                    <li><a href="index.html#reviews" class="block hover-[#1E1408] transition-colors">Reviews</a></li>
+                    <li><a href="mywork.html" class="block hover-[#1E1408] transition-colors">My Work</a></li>
+                    <li><a href="policies.html" class="block hover-[#1E1408] transition-colors">Policies & Hours</a></li>
+                    <li><a href="prices.html" class="block hover-[#1E1408] transition-colors">Pricing</a></li>
+                </ul>
+                <div class="mt-auto pt-10 border-t border-slate-100">
+                    <a href="prices.html" class="block w-full text-center px-6 bg-[#1E1408] text-white rounded-2xl font-bold shadow-lg shadow-[#DDD9C4] hover:bg-#140D05 transition-all">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <!-- Overlay -->
+            <label for="menu-toggle" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 peer-checked:opacity-100 peer-checked:pointer-events-auto lg:hidden z-[55]"></label>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ═══════════════════════════════════════════════════ HERO -->
+        <section class="relative bg-white overflow-hidden pt-16">
+            <!-- Background blob -->
+            <div class="max-w-7xl mx-auto px-6 py-14 md:py-24 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
+
+                <div class="space-y-7 text-center md:text-left reveal">
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-[#DDD9C4] text-[#140D05] border border-[#DDD9C4] shadow-sm">
+                        <svg class="w-4 h-4 mr-2 star-shimmer" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        <span class="text-sm font-bold tracking-wide uppercase">Worcester's Premier Photography Studio</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-950 tracking-tighter leading-[0.95]">
+                        Capturing Moments<br/> <span class="[#1E1408]">that will last Forever.</span>
+                    </h1>
+
+                    <p class="text-xl text-slate-600 max-w-xl mx-auto md:mx-0 leading-relaxed">
+                        Professional photography for sports, events, and life's most important moments. 
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row sm:justify-center md:justify-start gap-4 pt-2">
+                        <a href="prices.html" class=" group flex items-center justify-center px-10 py-4 bg-[#1E1408] text-white rounded-2xl font-bold hover:bg-[#140D05] hover:-translate-y-1 transition-all duration-300 text-lg">
+                            Book Now
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="mywork.html" class="flex items-center justify-center px-10 py-4 bg-white text-slate-900 rounded-2xl font-bold hover:bg-slate-50 transition-all duration-300 border border-slate-200 text-lg">
+                            View Gallery
+                        </a>
+                    </div>
+
+                    <!-- Trust signals -->
+                    <div class="flex items-center justify-center md:justify-start gap-6 pt-2">
+                        <div class="flex -space-x-2">
+                            <div class="w-9 h-9 rounded-full bg-[#DDD9C4] border-2 border-white flex items-center justify-center text-xs font-bold text-[#140D05]">S</div>
+                            <div class="w-9 h-9 rounded-full bg-[#DDD9C4] border-2 border-white flex items-center justify-center text-xs font-bold text-[#140D05]">M</div>
+                            <div class="w-9 h-9 rounded-full bg-[#DDD9C4] border-2 border-white flex items-center justify-center text-xs font-bold text-[#140D05]">J</div>
+                        </div>
+                        <div>
+                            <div class="flex text-[#F8E877] mb-0.5">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-600">Loved by 100+ clients in Worcester</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero image -->
+                <div class="relative reveal" style="transition-delay: 0.15s">
+                    <div class="absolute -inset-4 bg-[#F8E877]/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl transform md:rotate-2 hover:rotate-0 transition-transform duration-500 border-8 border-white">
+                        <img src="photo.jpg" alt="Beautiful lash extension work by VX.Alex" class="w-full aspect-[4/5] object-cover">
+                        <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-white/50">
+                            <p class="text-xs font-bold text-slate-900 uppercase tracking-widest">Certified Lash Artist</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating badge -->
+                    <div class="float-badge absolute -top-4 bg-[#1E1408] text-white rounded-2xl px-4 py-3 shadow-xl shadow-[#DDD9C4] text-center hidden md:block">
+                        <p class="text-2xl font-black leading-none">5★</p>
+                        <p class="text-xs font-bold tracking-wide mt-0.5 opacity-90">Rated</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ STATS BAR -->
+        <section class="py-10" style="border-color: var(--sand); background: var(--cream)">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-#1E1408">
+                    <div class="stat-pulse" style="animation-delay: 0s">
+                        <p class="text-4xl font-black tracking-tighter">100+</p>
+                        <p class="text-[#1E1408] font-semibold text-sm mt-1 uppercase tracking-widest">Happy Clients</p>
+                    </div>
+                    <div class="stat-pulse" style="animation-delay: 0.4s">
+                        <p class="text-4xl font-black tracking-tighter">5★</p>
+                        <p class="text-[#1E1408] font-semibold text-sm mt-1 uppercase tracking-widest">Average Rating</p>
+                    </div>
+                    <div class="stat-pulse" style="animation-delay: 0.8s">
+                        <p class="text-4xl font-black tracking-tighter">4+</p>
+                        <p class="text-[#1E1408] font-semibold text-sm mt-1 uppercase tracking-widest">Services Offered</p>
+                    </div>
+                    <div class="stat-pulse" style="animation-delay: 1.2s">
+                        <p class="text-4xl font-black tracking-tighter">Est.</p>
+                        <p class="text-[#1E1408] font-semibold text-sm mt-1 uppercase tracking-widest">Worcester 2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ BRAND POSITIONING -->
+        <section class="py-20 text-white overflow-hidden grain-overlay" style="background: var(--ink)">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                    <div class="space-y-8 reveal">
+                        <div>
+                            <p class="text-[#1E1408] font-semibold text-sm tracking-[0.3em] uppercase mb-4">Established 2026</p>
+                            <h2 class="text-6xl md:text-7xl font-extrabold tracking-tighter leading-tight">
+                                Brand <br>
+                                <span class="text-[#1E1408]" style="color: var(--gold);">Positioning</span>
+                            </h2>
+                        </div>
+                        <div class="space-y-6">
+                            <p class="text-white font-bold tracking-widest uppercase text-xs">VX.Alex's Standard</p>
+                            <p class="text-white text-lg leading-relaxed max-w-lg">
+                                VX.Alex is a passion-driven photography brand built on capturing real moments with purpose and precision. Rooted in a love for the craft, vx.alex focuses on making high-quality photography accessible to everyone—whether it’s athletes, students, or everyday clients who want their stories told.</p>
+                            <p class="text-white text-lg leading-relaxed max-w-lg">
+                                More than just photos, the brand is about showing up for others, filling a need, and delivering visuals that people can be proud of.
+                            </p>
+                        </div>
+                        <div class="pt-4">
+                            <a href="policies.html" class="text-sm font-bold tracking-widest uppercase border-black pb-2 hover:text-[#F8E877] hover:border-[#F8E877] transition-all text-[#F8E877]" >
+                                View Policies & Hours →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Brand emblem -->
+                    <div class="relative flex justify-center items-center reveal" style="transition-delay: 0.15s">
+                        <div class="absolute w-72 bg-[#1E1408]/20 rounded-full blur-[120px]"></div>
+                        <div class="relative z-10 text-center">
+                            <div class="mb-8 transform hover:scale-105 transition-transform duration-500">
+                                <img src="images/ChatGPT Image Apr 30, 2026, 10_30_32 AM.png" alt="">
+                                <div class="absolute top-0 right-8 text-blue-[#F8E877] star-shimmer">
+                                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ SERVICES / STYLE VALUES -->
+        <!-- <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <p class="text-[#1E1408] text-sm font-bold tracking-[0.3em] uppercase mb-3">What We Offer</p>
+                    <h2 class="text-5xl md:text-6xl font-extrabold text-slate-950 tracking-tighter leading-none">
+                        Our <span class="text-[#1E1408]">Services</span>
+                    </h2>
+                    <p class="text-slate-700 mt-4 text-lg max-w-xl mx-auto">Every set is customised to your eye shape, natural lashes, and personal style.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    Classic -->
+                    <!-- <div class="reveal p-8 rounded-3xl border border-slate-100 bg-slate-50/50 hover:border-[#DDD9C4] hover:shadow-lg hover:shadow-[#DDD9C4] transition-all group" style="transition-delay: 0s">
+                        <div class="w-14 bg-[#1E1408] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-[#DDD9C4] group-hover:scale-110 transition-transform">
+                            Lash / eye icon
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"/>
+                                <circle cx="12" cy="12" r="3" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Classic Set</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">One extension per natural lash for a clean, polished look. Perfect for everyday elegance and first-timers.</p>
+                    </div>  -->
+
+                    <!-- Hybrid -->
+                    <!-- <div class="reveal p-8 rounded-3xl border border-slate-100 bg-slate-50/50 hover:border-[#DDD9C4] hover:shadow-lg hover:shadow-[#DDD9C4] transition-all group" style="transition-delay: 0.1s">
+                        <div class="w-14 bg-[#1E1408] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-[#DDD9C4] group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1M4.22 4.22l.707.707m12.728 12.728l.707.707M3 12h1m16 0h1M4.22 19.78l.707-.707M18.95 5.05l.707-.707"/>
+                                <circle cx="12" cy="12" r="4" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Hybrid Extensions</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">A blend of classic and volume lashes — textured, full, and effortlessly glam. The best of both worlds.</p>
+                    </div> -->
+
+                    <!-- Volume -->
+                    <!-- <div class="reveal p-8 rounded-3xl border border-slate-100 bg-slate-50/50 hover:border-[#DDD9C4] hover:shadow-lg hover:shadow-[#DDD9C4] transition-all group" style="transition-delay: 0.2s">
+                        <div class="w-14 bg-[#1E1408] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-[#DDD9C4] group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Volume Glamour</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Mega-fluffy fans for ultimate drama and depth. Bold, striking lashes that turn heads everywhere you go.</p>
+                    </div> -->
+
+                    <!-- Lash Lift -->
+                    <!-- <div class="reveal p-8 rounded-3xl border border-slate-100 bg-slate-50/50 hover:border-[#DDD9C4] hover:shadow-lg hover:shadow-[#DDD9C4] transition-all group" style="transition-delay: 0.3s">
+                        <div class="w-14 bg-[#1E1408] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-[#DDD9C4] group-hover:scale-110 transition-transform">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l7 7 7-7M5 21l7-7 7 7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3 tracking-tight">Lash Lift & Tint</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Enhance your natural lashes with a curl and a deep tint. Low-maintenance luxury — no extensions needed.</p>
+                    </div>
+                </div> -->
+
+                <!-- <div class="text-center mt-10 reveal">
+                    <a href="prices.html" class="inline-flex items-center gap text-[#1E1408] font-bold hover:text-[#] transition-colors text-lg">
+                        See full pricing →
+                    </a>
+                </div>
+            </div>
+        </section> --> 
+
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+                    <div class="text-center mb-16 reveal">
+                    <p class="text-[#1E1408] text-sm font-bold tracking-[0.3em] uppercase mb-3">Our Work</p>
+                    <h2 class="text-5xl md:text-6xl font-extrabold text-slate-950 tracking-tighter leading-none">
+                        Browse the <span class="text-[#1E1408]">Gallery</span>
+                    </h2>
+                    <p class="text-slate-700 mt-4 text-lg max-w-xl mx-auto">Explore our work across every category — from high-energy sports to life's most cherished moments.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+
+                    <!-- Sports -->
+                    <div class="reveal group rounded-3xl border border-slate-100 bg-slate-50/50 overflow-hidden hover:border-[#DDD9C4] hover:shadow-lg hover:shadow-[#DDD9C4] transition-all" style="transition-delay: 0s">
+                        <div class="overflow-hidden aspect-[4/3]">
+                        <img src="images/baseball2.jpg" alt="Sports photography" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-8">
+                        <p class="text-[#1E1408] text-xs font-bold tracking-[0.3em] uppercase mb-2">Gallery</p>
+                        <h3 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-3">Sports</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Dynamic action shots, game-day energy, and athletic moments captured at their peak.</p>
+                        <a href="sports.html" class="inline-flex items-center gap-2 bg-[#1E1408] text-white text-sm font-bold px-6 py-3 rounded-full hover:bg-[#35240d] transition-colors">
+                            View Photos
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        </div>
+                    </div>
+
+                    <!-- Events -->
+                    <div class="reveal group rounded-3xl border border-slate-100 bg-slate-50/50 overflow-hidden hover:border-[#DDD9C4] hover:shadow-lg hover:shadow-[#DDD9C4] transition-all" style="transition-delay: 0.1s">
+                        <div class="overflow-hidden aspect-[4/3]">
+                        <img src="eventImages/elijah2.jpg" alt="Events photography" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-8">
+                        <p class="text-[#1E1408] text-xs font-bold tracking-[0.3em] uppercase mb-2">Gallery</p>
+                        <h3 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-3">Events</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Conferences, galas, product launches, and live experiences — every key moment documented.</p>
+                        <a href="events.html" class="inline-flex items-center gap-2 bg-[#1E1408] text-white text-sm font-bold px-6 py-3 rounded-full hover:bg-[#35240d] transition-colors">
+                            View Photos
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        </div>
+                    </div>
+
+                    <!-- Special Events -->
+                    <div class="reveal group rounded-3xl border border-slate-100 bg-slate-50/50 overflow-hidden hover:border-[#DDD9C4] hover:shadow-lg hover:shadow-[#DDD9C4] transition-all" style="transition-delay: 0.2s">
+                        <div class="overflow-hidden aspect-[4/3]">
+                        <img src="eventImages/lordina.jpg" alt="Special events photography" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="p-8">
+                        <p class="text-[#1E1408] text-xs font-bold tracking-[0.3em] uppercase mb-2">Gallery</p>
+                        <h3 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-3">Special Events</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Weddings, milestones, and once-in-a-lifetime celebrations — beautifully and intimately told.</p>
+                        <a href="special-events.html" class="inline-flex items-center gap-2 bg-[#1E1408] text-white text-sm font-bold px-6 py-3 rounded-full hover:bg-[#35240d] transition-colors">
+                            View Photos
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+                </section>
+
+        <!-- ═══════════════════════════════════════════════════ BRAND MISSION -->
+        <section class="py-24 bg-[#CFE3F2]">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                    <div class="relative group reveal">
+                        <div class="relative z-10 space-y-8">
+                            <h2 class="text-6xl md:text-8xl font-extrabold text-slate-950 tracking-tighter leading-[0.85]">
+                                Our <br><span class="text-[#1E1408]">Mission</span>
+                            </h2>
+                            <div class="relative aspect-[4/5] w-full max-w-sm rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white transform -rotate-2 group-hover:rotate-0 transition-transform duration-500">
+                                <div class="w-full h-full bg-gradient-to-br from-[#DDD9C4] to-[#DDD9C4] flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-[#F8E877]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+                    <div class="space-y-12 reveal" style="transition-delay: 0.15s">
+                        <div class="relative">
+                            <p class="text-2xl text-slate-600 leading-relaxed font-medium relative z-10">
+                                We are committed to creating more than just pictures — we create memories. Our mission is to capture the moments that mean the most to you that can be remembered and enjoyed for days to come.
+                            </p>
+                        </div>
+
+                        <ul class="space-y-8">
+                            <li class="flex items-center gap-5 group">
+                                <div class="flex-shrink-0 w-10 h bg-[#1E1408] text-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="text-xl font-bold text-slate-800 tracking-tight">Empower individuals through thoughtfully taken photos</span>
+                            </li>
+                            <li class="flex items-center gap-5 group">
+                                <div class="flex-shrink-0 w-10 h bg-[#1E1408] text-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="text-xl font-bold text-slate-800 tracking-tight">Promote a deeper connection of self image</span>
+                            </li>
+                            <li class="flex items-center gap-5 group">
+                                <div class="flex-shrink-0 w-10 bg-[#1E1408] text-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <span class="text-xl font-bold text-slate-800 tracking-tight">Lead with purpose, care, and conscious craftsmanship</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ REVIEWS -->
+        <section id="reviews" class="py-24 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+
+                
+                <div class="max-w-xl mb-16 text-center md:text-left relative z-10 reveal">
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-5 text-[#1E1408] border border-[#DDD9C4] shadow-sm mb-4 font-semibold text-sm">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                        Real Client Experiences
+                    </div>
+                    <h2 class="text-5xl md:text-6xl font-extrabold text-slate-950 tracking-tighter leading-[0.95]">
+                        Why Clients<br/> Are <span class="text-[#1E1408]">Obsessed</span>.
+                    </h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch relative z-10">
+
+                    <!-- Review 1 -->
+                    <div class="reveal bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col group hover:border-[#DDD9C4] hover:shadow-xl hover:shadow-[#DDD9C4] transition-all duration-300" style="transition-delay: 0s">
+                        <div class="flex text-[#F8E877] mb-6 space-x-1">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-700 leading-relaxed font-medium flex-grow mb-8 italic">
+                            "Honestly, I've never had lashes that looked this natural but also gave me so much confidence. VX.Alex is a true artist — the retention is insane!"
+                        </p>
+                        <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
+                            <div class="w-12 h-12 rounded-full bg-[#DDD9C4] flex items-center justify-center text-lg font-bold text-[#1E1408] border-2 border-white shadow-md">S</div>
+                            <div>
+                                <h4 class="font-bold text-slate-950">Sarah Jenkins</h4>
+                                <p class="text-xs font-semibold tracking-wide text-[#1E1408]">Volume Glamour Set</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="reveal bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col group hover:border-[#DDD9C4] hover:shadow-xl hover:shadow-[#DDD9C4] transition-all duration-300" style="transition-delay: 0.1s">
+                        <div class="flex text-[#F8E877] mb-6 space-x-1">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-700 leading-relaxed font-medium flex-grow mb-8 italic">
+                            "I was so nervous before my appointment, but VX.Alex was incredibly professional and made me feel so comfortable. I'm never going anywhere else now!"
+                        </p>
+                        <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
+                            <div class="w-12 h-12 rounded-full bg-[#DDD9C4] flex items-center justify-center text-lg font-bold text-[#1E1408] border-2 border-white shadow-md">M</div>
+                            <div>
+                                <h4 class="font-bold text-slate-950">Michelle Diaz</h4>
+                                <p class="text-xs font-semibold tracking-wide text-[#1E1408]">Hybrid Full Set</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="reveal bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col group hover:border-[#DDD9C4] hover:shadow-xl hover:shadow-[#DDD9C4] transition-all duration-300" style="transition-delay: 0.2s">
+                        <div class="flex text-[#F8E877] mb-6 space-x-1">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="text-lg text-slate-700 leading-relaxed font-medium flex-grow mb-8 italic">
+                            "The atmosphere is so relaxing and the attention to detail is just unmatched. My lashes stayed perfect for weeks — I get compliments everywhere!"
+                        </p>
+                        <div class="flex items-center gap-4 pt-6 border-t border-slate-200">
+                            <div class="w-12 h-12 rounded-full bg-[#DDD9C4] flex items-center justify-center text-lg font-bold text-[#1E1408] border-2 border-white shadow-md">J</div>
+                            <div>
+                                <h4 class="font-bold text-slate-950">Jessica R.</h4>
+                                <p class="text-xs font-semibold tracking-wide text-[#1E1408]">Classic Full Set</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ CTA -->
+        <section class="py-24 relative overflow-hidden" style="background: var(--ink)">
+            <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+                <p class="text-xs font-bold tracking-[0.3em] uppercase mb-4" style="color: var(--sand)">Ready to work together?</p>
+                <h2 style="font-family:'Bebas Neue',sans-serif; font-size: clamp(52px,10vw,130px); line-height:.9; color:#fff;" class="font-extrabold">
+                    LET'S<br><span style="color: var(--gold)">CREATE.</span>
+                </h2>
+                <p class="mt-6 text-lg max-w-xl mx-auto leading-relaxed" style="color: rgba(255, 255, 255, 0.8)">
+                    Spots are limited. Whether it's a game, a moment, or a vibe — let's make sure it gets captured right.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-10">
+                    <a href="prices.html" class="px-10 py-4 rounded-2xl font-bold text-lg transition-all hover:-translate-y-1" style="background: var(--gold); color: var(--ink-dark)">
+                        Book a Session
+                    </a>
+                    <a href="policies.html" class="px-10 py-4 rounded-2xl font-bold text-lg border transition-all hover:bg-white/10" style="border-color: rgba(221,217,196,.4); color: var(--sand)">
+                        View Policies
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════ FOOTER -->
+    <footer class="bg-white pt-20 pb-10 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+                <div class="space-y-6">
+                    <a href="index.html" class="text-3xl font-extrabold text-slate-900 tracking-tighter">
+                        VX.<span class="text-[#1E1408]">Alex</span>
+                    </a>
+                    <p class="text-slate-500 leading-relaxed">
+                        Elevating beauty standards in Worcester through precision artistry and conscious craftsmanship. Every lash, a masterpiece.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 ho[#1E1408] hover:text-white transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849s-.011 3.584-.069 4.849c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.849-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849s.012-3.584.07-4.849c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.337 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.337-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.28-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 ho[#1E1408] hover:text-white transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Navigation</h4>
+                    <ul class="space-y-4 text-slate-500 font-medium">
+                        <li><a href="index.html" class="hover-[#1E1408] transition-colors">Home</a></li>
+                        <li><a href="mywork.html" class="hover-[#1E1408] transition-colors">Gallery</a></li>
+                        <li><a href="policies.html" class="hover-[#1E1408] transition-colors">Policies & Hours</a></li>
+                        <li><a href="prices.html" class="hover-[#1E1408] transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Services</h4>
+                    <ul class="space-y-4 text-slate-500 font-medium">
+                        <li>Classic Full Set</li>
+                        <li>Hybrid Extensions</li>
+                        <li>Volume Glamour</li>
+                        <li>Lash Lift & Tint</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Visit Us</h4>
+                    <ul class="space-y-4 text-slate-500 font-medium">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-6 text-[#1E1408] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            Worcester, Massachusetts
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-6 text-[#1E1408] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            hello@envylashes.com
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-6 text-[#1E1408] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            By Appointment Only
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-[#1E1408] text-md font-bold">© 2026 Envy Lashes · VX.Alex. All rights reserved.</p>
+                <div class="flex items-center gap-8 text-sm font-bold text-slate-400 uppercase tracking-widest">
+                    <span class="text-[#1E1408]">Built in Worcester</span>
+                    <a href="policies.html" class="text-[#1E1408] transition-colors">Policies</a>
+                    <a href="#" class="text-[#1E1408] transition-colors">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll reveal JS -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
