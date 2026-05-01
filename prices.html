@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VX.Alex Pricing — Photography & Lash Services in Worcester, MA. Transparent pricing for sports, events, portraits, and lash extensions.">
+    <meta name="description" content="VX.Alex Pricing — Photography services in Worcester, MA.">
     <title>Pricing | VX.Alex</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- ─────────────────────────────────────────────────────────────────────
-         FONTS: Bebas Neue for display headings, DM Sans for body
-         (Same as mywork.html so the whole site stays cohesive)
-    ──────────────────────────────────────────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* ── BRAND CSS VARIABLES (matches index + mywork) ── */
         :root {
             --ink:      #1E1408;
             --sand:     #DDD9C4;
@@ -28,32 +22,7 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'DM Sans', sans-serif; }
 
-        /* ──────────────────────────────────────────────────
-           HAMBURGER MENU ANIMATION
-           FIX: Added `position: relative; z-index: 70` to
-           the label so it always sits above the drawer overlay.
-           The peer-checked state transforms each bar into an X.
-        ────────────────────────────────────────────────── */
-        #menu-toggle:checked ~ div .bar-top { transform: translateY(8px) rotate(45deg); }
-        #menu-toggle:checked ~ div .bar-mid { opacity: 0; transform: scaleX(0); }
-        #menu-toggle:checked ~ div .bar-bot { transform: translateY(-8px) rotate(-45deg); }
-        .bar-top, .bar-mid, .bar-bot {
-            transition: transform 0.3s ease, opacity 0.2s ease;
-            transform-origin: center;
-        }
-
-        /* ── SCROLL-REVEAL FADE UP ── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.65s ease, transform 0.65s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ── TICKER STRIPE (same as mywork.html) ── */
+        /* Ticker */
         @keyframes ticker {
             from { transform: translateX(0); }
             to   { transform: translateX(-50%); }
@@ -65,98 +34,40 @@
         }
         .ticker-track:hover { animation-play-state: paused; }
 
-        /* ── SECTION LABEL PILL ── */
-        .section-pill {
-            display: inline-flex;
-            align-items: center;
-            background: var(--cream);
-            color: var(--ink-dark);
-            border: 1px solid var(--sand);
-            border-radius: 999px;
-            padding: 6px 18px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ── ACCENT BAR (same as mywork.html) ── */
-        .accent-bar {
-            width: 56px;
-            height: 5px;
-            border-radius: 3px;
-            background: var(--ink);
-            margin-bottom: 18px;
-        }
-
-        /* ── PRICING CARD ── */
+        /* Price card */
         .price-card {
             background: #fff;
-            border: 1.5px solid #e8e5dc;
+            border: 2px solid #eceade;
             border-radius: 24px;
-            padding: 36px 32px;
-            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
-            position: relative;
-            overflow: hidden;
+            padding: 32px 28px;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
         }
         .price-card:hover {
             border-color: var(--sand);
-            box-shadow: 0 16px 48px rgba(30,20,8,.1);
-            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(30,20,8,.09);
+            transform: translateY(-3px);
         }
-
-        /* FEATURED / highlighted card gets the ink background */
         .price-card.featured {
             background: var(--ink);
             border-color: var(--ink);
             color: #fff;
         }
-        .price-card.featured .price-label  { color: var(--sand); }
-        .price-card.featured .price-amount { color: var(--gold); }
-        .price-card.featured .price-desc   { color: rgba(221,217,196,.75); }
-        .price-card.featured .price-detail { color: rgba(221,217,196,.6); }
-        .price-card.featured .divider      { border-color: rgba(221,217,196,.2); }
-        .price-card.featured .include-item { color: rgba(255,255,255,.85); }
-        .price-card.featured .include-icon { color: var(--gold); }
 
-        /* Badge on featured card */
-        .popular-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--gold);
-            color: var(--ink-dark);
-            font-size: 10px;
-            font-weight: 900;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 999px;
-        }
+        /* FAQ accordion */
+        details summary { list-style: none; }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] .chevron { transform: rotate(180deg); }
+        .chevron { transition: transform 0.25s ease; }
 
-        /* ── ADD-ON ROW ── */
-        .addon-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 0;
-            border-bottom: 1px solid #f0ede6;
-            gap: 16px;
-            transition: background 0.2s;
-        }
-        .addon-row:last-child { border-bottom: none; }
-        .addon-row:hover { background: var(--cream); border-radius: 12px; padding-left: 12px; padding-right: 12px; }
-
-        /* ── INFO BANNER ── */
-        .info-banner {
-            background: var(--sky);
-            border-left: 4px solid var(--ink);
-            border-radius: 0 16px 16px 0;
-            padding: 16px 20px;
-        }
-
-        /* ── GRAIN OVERLAY (subtle texture like index.html) ── */
+        /* Grain */
         .grain-overlay { position: relative; }
         .grain-overlay::after {
             content: '';
@@ -171,117 +82,61 @@
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 antialiased">
 
-<!-- ═══════════════════════════════════════════════════════════
-     HEADER  — copied from mywork.html with hamburger z-index fix
-     FIX NOTES:
-       1. The hamburger <label> now has `z-index: 70` explicitly
-          so it renders above the drawer (z-60) and overlay (z-55).
-       2. The close ✕ button inside the drawer also has its own
-          z-index so it's always tappable.
-       3. The overlay label uses pointer-events correctly.
-════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════ HEADER -->
 <header class="bg-white/95 backdrop-blur-md fixed w-full top-0 z-50 border-b border-gray-100 shadow-sm">
     <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-8">
-
-        <!-- Logo -->
         <a href="index.html" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tighter shrink-0 hover:opacity-80 transition-opacity">
             VX.<span style="color:var(--ink)">Alex</span>
         </a>
-
-        <!-- Desktop nav links -->
         <div class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-slate-600">
             <a href="index.html" class="hover:text-[#1E1408] transition-colors">Home</a>
             <a href="index.html#reviews" class="hover:text-[#1E1408] transition-colors">Reviews</a>
             <a href="mywork.html" class="hover:text-[#1E1408] transition-colors">My Work</a>
-            <a href="policies.html" class="hover:text-[#1E1408] transition-colors">Policies & Hours</a>
-            <!-- Active state: current page is Pricing -->
-            <a href="prices.html" class="px-5 py-2.5 rounded-xl font-bold text-white transition-all" style="background:var(--ink)">
-                Book Now
+            <a href="prices.html" class="text-[#1E1408] font-bold">Prices</a>
+            <a href="contactPage.html" class="px-5 py-2.5 rounded-xl font-bold text-white transition-all hover:opacity-90" style="background:var(--ink)">
+                Contact Me
             </a>
         </div>
-
-        <!-- ── MOBILE HAMBURGER ──
-             The hidden checkbox drives all open/close state via CSS peer selectors.
-             IMPORTANT: The <label> must come RIGHT AFTER the checkbox in the DOM
-             so the `peer` utility works correctly. -->
-        <input type="checkbox" id="menu-toggle" class="hidden peer">
-
-        <!-- Hamburger icon button — z-[70] keeps it above the drawer -->
-        <label for="menu-toggle"
-               class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-slate-50 rounded-xl transition-colors relative"
-               style="z-index:70">
+        <button id="hamburger-btn" class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-slate-50 rounded-xl transition-all z-40 relative" aria-label="Open menu">
             <div class="flex flex-col gap-[6px] w-7">
-                <span class="bar-top block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
-                <span class="bar-mid block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
-                <span class="bar-bot block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
+                <span class="block h-[2.5px] w-full bg-slate-900 rounded-full transition-all duration-300 origin-center" id="bar-top"></span>
+                <span class="block h-[2.5px] w-full bg-slate-900 rounded-full transition-all duration-300" id="bar-mid"></span>
+                <span class="block h-[2.5px] w-full bg-slate-900 rounded-full transition-all duration-300 origin-center" id="bar-bot"></span>
             </div>
-        </label>
-
-        <!-- Mobile slide-in drawer — z-[60] sits below the hamburger label -->
-        <div class="fixed inset-y-0 right-0 w-[300px] bg-white shadow-2xl
-                    transition-transform duration-300 transform translate-x-full
-                    peer-checked:translate-x-0 lg:hidden p-8 flex flex-col"
-             style="z-index:60">
-
-            <!-- ✕ close button inside drawer -->
-            <div class="flex justify-end mb-10" style="z-index:71; position:relative;">
-                <label for="menu-toggle" class="cursor-pointer p-2 text-slate-400 hover:text-[#1E1408] transition-colors">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </label>
+        </button>
+        <div id="mobile-drawer" class="fixed inset-y-0 right-0 w-[300px] bg-white shadow-2xl transition-transform duration-300 transform translate-x-full lg:hidden z-[60] p-8 flex flex-col">
+            <div class="flex justify-end mb-10">
+                <button id="close-btn" class="cursor-pointer p-2 text-slate-400 hover:text-[#1E1408] transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
             </div>
-
-            <!-- Nav links -->
             <ul class="flex flex-col space-y-6 text-xl font-bold text-slate-800">
-                <li><a href="index.html"         class="block hover:text-[#1E1408] transition-colors">Home</a></li>
+                <li><a href="index.html" class="block hover:text-[#1E1408] transition-colors">Home</a></li>
                 <li><a href="index.html#reviews" class="block hover:text-[#1E1408] transition-colors">Reviews</a></li>
-                <li><a href="mywork.html"         class="block hover:text-[#1E1408] transition-colors">My Work</a></li>
-                <li><a href="policies.html"       class="block hover:text-[#1E1408] transition-colors">Policies & Hours</a></li>
-                <!-- Active: Pricing page -->
+                <li><a href="mywork.html" class="block hover:text-[#1E1408] transition-colors">My Work</a></li>
+                <li><a href="policies.html" class="block hover:text-[#1E1408] transition-colors">Policies & Hours</a></li>
                 <li><a href="prices.html" class="block font-black" style="color:var(--ink)">Pricing</a></li>
             </ul>
-
-            <!-- CTA at the bottom of drawer -->
             <div class="mt-auto pt-10 border-t border-slate-100">
-                <a href="prices.html"
-                   class="block w-full text-center px-6 py-4 text-white rounded-2xl font-bold shadow-lg"
-                   style="background:var(--ink)">
-                    Book Now
-                </a>
+                <a href="contactPage.html" class="block w-full text-center px-6 py-4 text-white rounded-2xl font-bold" style="background:var(--ink)">Contact Me</a>
             </div>
-        </div><!-- /drawer -->
-
-        <!-- Dark overlay behind drawer — z-[55] so it's under both drawer and hamburger -->
-        <label for="menu-toggle"
-               class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none
-                      transition-opacity duration-300 peer-checked:opacity-100
-                      peer-checked:pointer-events-auto lg:hidden"
-               style="z-index:55">
-        </label>
-
+        </div>
+        <div id="overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden z-[55]"></div>
     </nav>
 </header>
-<!-- /HEADER -->
 
+<main class="pt-[72px]">
 
-<main class="pt-20">
-
-    <!-- ═══════════════════════════════════════════════════════════
-         TICKER STRIPE — same animation as mywork.html
-    ════════════════════════════════════════════════════════════ -->
-    <div class="overflow-hidden py-[14px]" style="background:var(--ink); color:var(--sand); white-space:nowrap;">
+    <!-- ══════════════════════════════════════ TICKER -->
+    <div class="overflow-hidden py-[14px]" style="background:var(--ink); white-space:nowrap;">
         <div class="ticker-track text-sm font-bold tracking-widest uppercase" style="color:var(--sand)">
             <span class="mx-8">Photography</span><span style="color:var(--gold)" class="mx-2">✦</span>
-            <span class="mx-8">Lash Services</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">Sports</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">Events</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">Portraits</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">Worcester MA</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">VX.Alex</span><span style="color:var(--gold)" class="mx-2">✦</span>
-            <!-- Duplicate for seamless loop -->
             <span class="mx-8">Photography</span><span style="color:var(--gold)" class="mx-2">✦</span>
-            <span class="mx-8">Lash Services</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">Sports</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">Events</span><span style="color:var(--gold)" class="mx-2">✦</span>
             <span class="mx-8">Portraits</span><span style="color:var(--gold)" class="mx-2">✦</span>
@@ -290,713 +145,279 @@
         </div>
     </div>
 
-
-    <!-- ═══════════════════════════════════════════════════════════
-         PAGE HERO — intro blurb + page title
-    ════════════════════════════════════════════════════════════ -->
-    <section class="py-20 bg-white">
+    <!-- ══════════════════════════════════════ PAGE HERO -->
+    <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="max-w-3xl reveal">
-                <div class="section-pill">
-                    <!-- Dollar sign icon -->
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    Transparent Pricing
-                </div>
-
-                <div class="accent-bar"></div>
-
-                <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,9vw,110px); line-height:.88; color:var(--ink)">
-                    CLEAR RATES.<br>
-                    <span style="color:var(--ink-dark)">REAL VALUE.</span>
+            <div class="max-w-2xl reveal">
+                <p class="text-xs font-black tracking-[.25em] uppercase mb-3" style="color:var(--ink)">Transparent Pricing</p>
+                <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,10vw,120px); line-height:.88; color:var(--ink)">
+                    CLEAR RATES.<br><span style="-webkit-text-stroke: 2px var(--ink); color: transparent;">REAL VALUE.</span>
                 </h1>
-
-                <p class="text-slate-500 mt-6 text-lg leading-relaxed max-w-xl">
-                    Every package is built around what you actually need —
-                    no hidden fees, no surprises. Scroll down to find your
-                    service and reach out to lock in your slot.
+                <p class="text-slate-500 mt-5 text-lg leading-relaxed max-w-lg">
+                    No hidden fees, no surprises. Pick your service and reach out to lock in your slot.
                 </p>
-
-                <!-- Quick info note -->
-                <!-- TODO: Update deposit/payment info here when ready -->
-                <div class="info-banner mt-8 max-w-xl">
-                    <p class="text-sm font-bold" style="color:var(--ink)">
-                        💬 Not sure what you need? DM on Instagram or send an email and we'll figure it out together.
-                    </p>
-                </div>
             </div>
         </div>
     </section>
 
-
-    <!-- ═══════════════════════════════════════════════════════════
-         SECTION 1 — PHOTOGRAPHY PRICING
-         Three tiers: Sports, Events, Portraits
-         TODO: Replace "$__" placeholders with real prices
-    ════════════════════════════════════════════════════════════ -->
-    <section id="photography-pricing" class="py-20" style="background:var(--cream);">
+    <!-- ══════════════════════════════════════ PHOTOGRAPHY PRICING -->
+    <section id="photography" class="py-20" style="background:var(--cream);">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
-            <!-- Section header -->
-            <div class="reveal mb-14">
-                <div class="section-pill">
-                    <!-- Camera icon -->
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                    Photography Services
-                </div>
-                <div class="accent-bar"></div>
-                <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,7vw,80px); line-height:.9; color:var(--ink)">
-                    PHOTOGRAPHY
-                </h2>
-                <p class="text-slate-600 mt-3 max-w-lg">
-                    Sports, events, portraits — each shoot is tailored to your vibe.
-                    Packages start below; custom quotes available for larger gigs.
-                </p>
+            <div class="reveal mb-12">
+                <p class="text-xs font-black tracking-[.25em] uppercase mb-2" style="color:var(--ink)">Photography Services</p>
+                <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(42px,7vw,88px); line-height:.9; color:var(--ink)">PHOTOGRAPHY</h2>
             </div>
 
-            <!-- ── 3-column card grid ── -->
             <div class="grid md:grid-cols-3 gap-6">
 
-                <!-- ── SPORTS PHOTOGRAPHY ── -->
+                <!-- Sports -->
                 <div class="price-card reveal" style="transition-delay:.0s">
-                    <p class="price-label text-xs font-black tracking-[.2em] uppercase mb-2" style="color:var(--ink)">Sports</p>
+                    <p class="text-xs font-black tracking-[.2em] uppercase mb-3" style="color:var(--ink)">Sports</p>
+                    <p style="font-family:'Bebas Neue',sans-serif; font-size:64px; line-height:1; color:var(--ink)" class="mb-1">$__</p>
+                    <p class="text-xs font-semibold text-slate-400 mb-6">Starting rate · contact for quote</p>
 
-                    <!-- TODO: Add price — e.g. "Starting at $__" -->
-                    <p class="price-amount text-5xl font-black tracking-tighter mb-1" style="font-family:'Bebas Neue',sans-serif; color:var(--ink)">
-                        $__
-                    </p>
-                    <p class="price-detail text-xs font-semibold text-slate-400 mb-5">Starting rate — contact for exact quote</p>
+                    <h3 class="text-base font-black mb-2" style="color:var(--ink)">Game Day Coverage</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">Action shots, athlete spotlights, and team moments. Full game or set periods — ideal for school sports, local leagues, and showcases.</p>
 
-                    <hr class="divider border-slate-100 mb-5">
-
-                    <h3 class="text-lg font-black mb-1" style="color:var(--ink)">Game Day Coverage</h3>
-                    <p class="price-desc text-sm text-slate-500 leading-relaxed mb-6">
-                        <!-- TODO: Add your own description of what's included -->
-                        Action shots, athlete spotlights, team moments — full game or set periods.
-                        Ideal for school sports, local leagues, and showcases.
-                    </p>
-
-                    <!-- What's included checklist -->
-                    <!-- TODO: Edit these bullets to match what you actually deliver -->
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">__ edited digital photos</span>
+                    <ul class="space-y-2.5 mb-8">
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            __ edited digital photos
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">Online gallery delivery</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Online gallery delivery
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">__ day turnaround</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            __ day turnaround
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">Print-ready resolution</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Print-ready resolution
                         </li>
                     </ul>
 
-                    <a href="mailto:hello@envylashes.com"
-                       class="mt-8 block w-full text-center py-3 rounded-2xl font-bold text-sm transition-all hover:-translate-y-0.5"
-                       style="background:var(--cream); color:var(--ink); border:1.5px solid var(--sand)">
-                        Book Sports Shoot →
+                    <a href="contactPage.html" class="block w-full text-center py-3 rounded-2xl font-bold text-sm transition-all hover:-translate-y-0.5" style="background:var(--cream); color:var(--ink); border:2px solid var(--sand)">
+                        Contact Me →
                     </a>
-                </div><!-- /sports card -->
+                </div>
 
+                <!-- Events — FEATURED -->
+                <div class="price-card featured reveal" style="transition-delay:.1s; position:relative;">
+                    <span class="absolute top-5 right-5 text-[10px] font-black tracking-[.15em] uppercase px-3 py-1 rounded-full" style="background:var(--gold); color:var(--ink-dark)">Most Popular</span>
 
-                <!-- ── EVENTS PHOTOGRAPHY — FEATURED ── -->
-                <div class="price-card featured reveal" style="transition-delay:.1s">
-                    <span class="popular-badge">Most Popular</span>
+                    <p class="text-xs font-black tracking-[.2em] uppercase mb-3" style="color:var(--sand)">Events</p>
+                    <p style="font-family:'Bebas Neue',sans-serif; font-size:64px; line-height:1; color:var(--gold)" class="mb-1">$__</p>
+                    <p class="text-xs font-semibold mb-6" style="color:rgba(221,217,196,.6)">Starting rate · contact for quote</p>
 
-                    <p class="price-label text-xs font-black tracking-[.2em] uppercase mb-2">Events</p>
+                    <h3 class="text-base font-black mb-2">Event Coverage</h3>
+                    <p class="text-sm leading-relaxed mb-6" style="color:rgba(221,217,196,.75)">Graduations, birthdays, showcases, community events — every milestone captured from start to finish.</p>
 
-                    <!-- TODO: Add price -->
-                    <p class="price-amount text-5xl font-black tracking-tighter mb-1" style="font-family:'Bebas Neue',sans-serif;">
-                        $__
-                    </p>
-                    <p class="price-detail text-xs font-semibold mb-5">Starting rate — contact for exact quote</p>
-
-                    <hr class="divider border-[rgba(221,217,196,.2)] mb-5">
-
-                    <h3 class="text-lg font-black mb-1">Event Coverage</h3>
-                    <p class="price-desc text-sm leading-relaxed mb-6">
-                        <!-- TODO: Add your own description -->
-                        Graduations, birthdays, showcases, community events — every milestone
-                        captured from start to finish.
-                    </p>
-
-                    <!-- What's included -->
-                    <!-- TODO: Edit these bullets -->
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium">__ edited digital photos</span>
+                    <ul class="space-y-2.5 mb-8">
+                        <li class="flex items-center gap-2.5 text-sm font-medium" style="color:rgba(255,255,255,.85)">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            __ edited digital photos
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium">Up to __ hours coverage</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium" style="color:rgba(255,255,255,.85)">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Up to __ hours coverage
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium">Online gallery delivery</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium" style="color:rgba(255,255,255,.85)">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Online gallery delivery
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium">__ day turnaround</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium">Social-ready exports included</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium" style="color:rgba(255,255,255,.85)">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--gold)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Social-ready exports included
                         </li>
                     </ul>
 
-                    <a href="mailto:hello@envylashes.com"
-                       class="mt-8 block w-full text-center py-3 rounded-2xl font-bold text-sm transition-all hover:-translate-y-0.5"
-                       style="background:var(--gold); color:var(--ink-dark)">
-                        Book Event Shoot →
+                    <a href="contactPage.html" class="block w-full text-center py-3 rounded-2xl font-bold text-sm transition-all hover:-translate-y-0.5" style="background:var(--gold); color:var(--ink-dark)">
+                        Contact Me →
                     </a>
-                </div><!-- /events card -->
+                </div>
 
-
-                <!-- ── PORTRAITS PHOTOGRAPHY ── -->
+                <!-- Portraits -->
                 <div class="price-card reveal" style="transition-delay:.2s">
-                    <p class="price-label text-xs font-black tracking-[.2em] uppercase mb-2" style="color:var(--ink)">Portraits</p>
+                    <p class="text-xs font-black tracking-[.2em] uppercase mb-3" style="color:var(--ink)">Portraits</p>
+                    <p style="font-family:'Bebas Neue',sans-serif; font-size:64px; line-height:1; color:var(--ink)" class="mb-1">$__</p>
+                    <p class="text-xs font-semibold text-slate-400 mb-6">Starting rate · contact for quote</p>
 
-                    <!-- TODO: Add price -->
-                    <p class="price-amount text-5xl font-black tracking-tighter mb-1" style="font-family:'Bebas Neue',sans-serif; color:var(--ink)">
-                        $__
-                    </p>
-                    <p class="price-detail text-xs font-semibold text-slate-400 mb-5">Starting rate — contact for exact quote</p>
+                    <h3 class="text-base font-black mb-2" style="color:var(--ink)">Portrait Session</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">Senior portraits, headshots, lifestyle, creative concepts — authentic photos that tell your story on your terms.</p>
 
-                    <hr class="divider border-slate-100 mb-5">
-
-                    <h3 class="text-lg font-black mb-1" style="color:var(--ink)">Portrait Session</h3>
-                    <p class="price-desc text-sm text-slate-500 leading-relaxed mb-6">
-                        <!-- TODO: Add your own description -->
-                        Senior portraits, headshots, lifestyle, creative concepts — authentic photos
-                        that tell YOUR story on your terms.
-                    </p>
-
-                    <!-- What's included -->
-                    <!-- TODO: Edit these bullets -->
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">__ edited digital photos</span>
+                    <ul class="space-y-2.5 mb-8">
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            __ edited digital photos
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">__ outfit changes</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            __ outfit changes
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">Location of your choice</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Location of your choice
                         </li>
-                        <li class="flex items-start gap-3">
-                            <svg class="include-icon w-4 h-4 mt-0.5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            <span class="include-item text-sm font-medium text-slate-700">__ day turnaround</span>
+                        <li class="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+                            <svg class="w-4 h-4 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            __ day turnaround
                         </li>
                     </ul>
 
-                    <a href="mailto:hello@envylashes.com"
-                       class="mt-8 block w-full text-center py-3 rounded-2xl font-bold text-sm transition-all hover:-translate-y-0.5"
-                       style="background:var(--cream); color:var(--ink); border:1.5px solid var(--sand)">
-                        Book Portrait Session →
+                    <a href="contactPage.html" class="block w-full text-center py-3 rounded-2xl font-bold text-sm transition-all hover:-translate-y-0.5" style="background:var(--cream); color:var(--ink); border:2px solid var(--sand)">
+                        Contact Me →
                     </a>
-                </div><!-- /portraits card -->
-
-            </div><!-- /photography grid -->
-
-
-            <!-- ── PHOTOGRAPHY ADD-ONS ──
-                 These are extras you can upsell on top of any shoot
-                 TODO: Fill in prices and any extras you offer -->
-            <div class="mt-14 reveal">
-                <h3 class="text-2xl font-black mb-6" style="color:var(--ink)">Photography Add-Ons</h3>
-                <div class="bg-white rounded-3xl p-8 border" style="border-color:var(--sand)">
-
-                    <!-- Extra edited photos -->
-                    <div class="addon-row">
-                        <div>
-                            <p class="font-bold text-slate-900">Additional Edited Photos</p>
-                            <!-- TODO: Add description if needed -->
-                            <p class="text-sm text-slate-400">Extra selects edited beyond your base package</p>
-                        </div>
-                        <!-- TODO: Replace $__ with real price, e.g. "$5 / photo" -->
-                        <p class="font-black text-xl shrink-0" style="color:var(--ink)">$__ / photo</p>
-                    </div>
-
-                    <!-- Rush delivery -->
-                    <div class="addon-row">
-                        <div>
-                            <p class="font-bold text-slate-900">Rush Delivery</p>
-                            <!-- TODO: Add turnaround time detail -->
-                            <p class="text-sm text-slate-400">Gallery delivered within __ hours/days</p>
-                        </div>
-                        <!-- TODO: Replace $__ -->
-                        <p class="font-black text-xl shrink-0" style="color:var(--ink)">$__</p>
-                    </div>
-
-                    <!-- Extended coverage -->
-                    <div class="addon-row">
-                        <div>
-                            <p class="font-bold text-slate-900">Extended Coverage</p>
-                            <p class="text-sm text-slate-400">Each additional hour beyond package</p>
-                        </div>
-                        <!-- TODO: Replace $__ -->
-                        <p class="font-black text-xl shrink-0" style="color:var(--ink)">$__ / hr</p>
-                    </div>
-
-                    <!-- Printed gallery -->
-                    <div class="addon-row">
-                        <div>
-                            <p class="font-bold text-slate-900">Printed Photo Set</p>
-                            <!-- TODO: Add print sizes you offer -->
-                            <p class="text-sm text-slate-400">__ prints — sizes available: __</p>
-                        </div>
-                        <!-- TODO: Replace $__ -->
-                        <p class="font-black text-xl shrink-0" style="color:var(--ink)">$__</p>
-                    </div>
-
                 </div>
-            </div><!-- /photo add-ons -->
 
-        </div>
-    </section><!-- /photography section -->
-
-
-    <!-- ═══════════════════════════════════════════════════════════
-         SECTION 2 — LASH SERVICES PRICING
-         Classic / Hybrid / Volume / Lash Lift + fills
-         TODO: Replace all $__ with real prices
-    ════════════════════════════════════════════════════════════ -->
-    <section id="lash-pricing" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-
-            <!-- Section header -->
-            <div class="reveal mb-14">
-                <div class="section-pill">
-                    <!-- Eye icon -->
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"/>
-                        <circle cx="12" cy="12" r="3" stroke-width="2.5"/>
-                    </svg>
-                    Lash Extension Services
-                </div>
-                <div class="accent-bar"></div>
-                <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,7vw,80px); line-height:.9; color:var(--ink)">
-                    LASH SERVICES
-                </h2>
-                <p class="text-slate-500 mt-3 max-w-lg">
-                    Every set is fully customized to your eye shape, natural lashes,
-                    and personal style. Full sets and fill options listed below.
-                </p>
             </div>
 
-            <!-- ── 4-column lash card grid ── -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-                <!-- ── CLASSIC SET ── -->
-                <div class="price-card reveal" style="transition-delay:.0s">
-                    <!-- Icon -->
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 shadow-md"
-                         style="background:var(--ink)">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 12C2 12 5 5 12 5C19 5 22 12 22 12C22 12 19 19 12 19C5 19 2 12 2 12Z"/>
-                            <circle cx="12" cy="12" r="3" stroke-width="2"/>
-                        </svg>
-                    </div>
-
-                    <p class="price-label text-xs font-black tracking-[.2em] uppercase mb-1" style="color:var(--ink)">Classic</p>
-
-                    <!-- TODO: Add full set price -->
-                    <p class="price-amount text-4xl font-black tracking-tighter" style="font-family:'Bebas Neue',sans-serif; color:var(--ink)">$__</p>
-                    <p class="text-xs font-semibold text-slate-400 mb-5">Full Set</p>
-
-                    <hr class="border-slate-100 mb-5">
-
-                    <h3 class="font-black text-base mb-2" style="color:var(--ink)">Classic Full Set</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-5">
-                        <!-- TODO: Tweak if needed -->
-                        One extension per natural lash. Clean, polished,
-                        everyday-ready look perfect for first-timers.
-                    </p>
-
-                    <!-- Fill pricing row -->
-                    <!-- TODO: Add fill price -->
-                    <div class="flex items-center justify-between py-2 px-3 rounded-xl" style="background:var(--cream)">
-                        <span class="text-xs font-bold text-slate-600">Fill (2–3 wks)</span>
-                        <span class="text-sm font-black" style="color:var(--ink)">$__</span>
-                    </div>
-                </div><!-- /classic -->
-
-
-                <!-- ── HYBRID SET — FEATURED ── -->
-                <div class="price-card featured reveal" style="transition-delay:.1s">
-                    <span class="popular-badge">Popular</span>
-
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 shadow-md"
-                         style="background:rgba(248,232,119,.2)">
-                        <svg class="w-6 h-6" style="color:var(--gold)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1M4.22 4.22l.707.707m12.728 12.728l.707.707M3 12h1m16 0h1M4.22 19.78l.707-.707M18.95 5.05l.707-.707"/>
-                            <circle cx="12" cy="12" r="4" stroke-width="2"/>
-                        </svg>
-                    </div>
-
-                    <p class="price-label text-xs font-black tracking-[.2em] uppercase mb-1">Hybrid</p>
-
-                    <!-- TODO: Add full set price -->
-                    <p class="price-amount text-4xl font-black tracking-tighter" style="font-family:'Bebas Neue',sans-serif;">$__</p>
-                    <p class="text-xs font-semibold mb-5">Full Set</p>
-
-                    <hr class="divider mb-5">
-
-                    <h3 class="font-black text-base mb-2">Hybrid Extensions</h3>
-                    <p class="price-desc text-sm leading-relaxed mb-5">
-                        Classic + volume blend — textured, full, and effortlessly glam.
-                        Best of both worlds for natural drama.
-                    </p>
-
-                    <!-- Fill pricing -->
-                    <!-- TODO: Add fill price -->
-                    <div class="flex items-center justify-between py-2 px-3 rounded-xl" style="background:rgba(248,232,119,.1)">
-                        <span class="text-xs font-bold" style="color:var(--sand)">Fill (2–3 wks)</span>
-                        <span class="text-sm font-black" style="color:var(--gold)">$__</span>
-                    </div>
-                </div><!-- /hybrid -->
-
-
-                <!-- ── VOLUME SET ── -->
-                <div class="price-card reveal" style="transition-delay:.2s">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 shadow-md"
-                         style="background:var(--ink)">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
-                    </div>
-
-                    <p class="price-label text-xs font-black tracking-[.2em] uppercase mb-1" style="color:var(--ink)">Volume</p>
-
-                    <!-- TODO: Add full set price -->
-                    <p class="price-amount text-4xl font-black tracking-tighter" style="font-family:'Bebas Neue',sans-serif; color:var(--ink)">$__</p>
-                    <p class="text-xs font-semibold text-slate-400 mb-5">Full Set</p>
-
-                    <hr class="border-slate-100 mb-5">
-
-                    <h3 class="font-black text-base mb-2" style="color:var(--ink)">Volume Glamour</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-5">
-                        Mega-fluffy fans for ultimate drama and depth.
-                        Bold, striking lashes that turn heads everywhere.
-                    </p>
-
-                    <!-- Fill pricing -->
-                    <!-- TODO: Add fill price -->
-                    <div class="flex items-center justify-between py-2 px-3 rounded-xl" style="background:var(--cream)">
-                        <span class="text-xs font-bold text-slate-600">Fill (2–3 wks)</span>
-                        <span class="text-sm font-black" style="color:var(--ink)">$__</span>
-                    </div>
-                </div><!-- /volume -->
-
-
-                <!-- ── LASH LIFT & TINT ── -->
-                <div class="price-card reveal" style="transition-delay:.3s">
-                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 shadow-md"
-                         style="background:var(--ink)">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l7 7 7-7M5 21l7-7 7 7"/>
-                        </svg>
-                    </div>
-
-                    <p class="price-label text-xs font-black tracking-[.2em] uppercase mb-1" style="color:var(--ink)">Lift & Tint</p>
-
-                    <!-- TODO: Add price (single service, no fill) -->
-                    <p class="price-amount text-4xl font-black tracking-tighter" style="font-family:'Bebas Neue',sans-serif; color:var(--ink)">$__</p>
-                    <p class="text-xs font-semibold text-slate-400 mb-5">Per Session</p>
-
-                    <hr class="border-slate-100 mb-5">
-
-                    <h3 class="font-black text-base mb-2" style="color:var(--ink)">Lash Lift & Tint</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-5">
-                        Enhance your natural lashes with a curl + deep tint.
-                        Low-maintenance luxury — no extensions needed.
-                    </p>
-
-                    <!-- Lasts info -->
-                    <!-- TODO: Update duration if different -->
-                    <div class="flex items-center justify-between py-2 px-3 rounded-xl" style="background:var(--cream)">
-                        <span class="text-xs font-bold text-slate-600">Lasts approx.</span>
-                        <span class="text-sm font-black" style="color:var(--ink)">6–8 wks</span>
-                    </div>
-                </div><!-- /lash lift -->
-
-            </div><!-- /lash card grid -->
-
-
-            <!-- ── LASH ADD-ONS & NOTES ── -->
-            <div class="mt-14 grid md:grid-cols-2 gap-8 reveal">
-
-                <!-- Add-ons table -->
-                <div>
-                    <h3 class="text-2xl font-black mb-6" style="color:var(--ink)">Lash Add-Ons</h3>
-                    <div class="bg-slate-50 rounded-3xl p-8 border" style="border-color:var(--sand)">
-
-                        <!-- Removal -->
-                        <div class="addon-row">
+            <!-- Add-ons — simple clean table -->
+            <div class="mt-12 reveal">
+                <p class="text-xs font-black tracking-[.25em] uppercase mb-5" style="color:var(--ink)">Add-Ons</p>
+                <div class="bg-white rounded-3xl overflow-hidden border-2" style="border-color:var(--sand)">
+                    <div class="divide-y" style="divide-color:var(--sand)">
+                        <div class="flex items-center justify-between px-7 py-5">
                             <div>
-                                <p class="font-bold text-slate-900">Lash Removal</p>
-                                <p class="text-sm text-slate-400">Safe removal of previous set</p>
+                                <p class="font-bold text-slate-900 text-sm">Additional Edited Photos</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Extra selects beyond your base package</p>
                             </div>
-                            <!-- TODO: Replace $__ -->
-                            <p class="font-black text-xl shrink-0" style="color:var(--ink)">$__</p>
+                            <p class="font-black text-lg shrink-0 ml-6" style="color:var(--ink)">$__ / photo</p>
                         </div>
-
-                        <!-- Late fill (3+ weeks) -->
-                        <div class="addon-row">
+                        <div class="flex items-center justify-between px-7 py-5">
                             <div>
-                                <p class="font-bold text-slate-900">Late Fill (3+ weeks)</p>
-                                <!-- TODO: Update week range if different -->
-                                <p class="text-sm text-slate-400">When more time has passed since last fill</p>
+                                <p class="font-bold text-slate-900 text-sm">Rush Delivery</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Gallery within __ hours</p>
                             </div>
-                            <!-- TODO: Replace $__ -->
-                            <p class="font-black text-xl shrink-0" style="color:var(--ink)">$__</p>
+                            <p class="font-black text-lg shrink-0 ml-6" style="color:var(--ink)">$__</p>
                         </div>
-
-                        <!-- Upgrade between styles -->
-                        <div class="addon-row">
+                        <div class="flex items-center justify-between px-7 py-5">
                             <div>
-                                <p class="font-bold text-slate-900">Style Upgrade</p>
-                                <p class="text-sm text-slate-400">Upgrading from Classic → Hybrid or Hybrid → Volume</p>
+                                <p class="font-bold text-slate-900 text-sm">Extended Coverage</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Each additional hour beyond your package</p>
                             </div>
-                            <!-- TODO: Replace $__ -->
-                            <p class="font-black text-xl shrink-0" style="color:var(--ink)">$__</p>
+                            <p class="font-black text-lg shrink-0 ml-6" style="color:var(--ink)">$__ / hr</p>
                         </div>
-
                     </div>
-                </div><!-- /lash add-ons -->
-
-
-                <!-- Important notes / policies quick ref -->
-                <div>
-                    <h3 class="text-2xl font-black mb-6" style="color:var(--ink)">Good to Know</h3>
-                    <div class="space-y-4">
-
-                        <!-- Note 1 — deposit -->
-                        <!-- TODO: Add your deposit amount/policy -->
-                        <div class="info-banner">
-                            <p class="text-sm font-bold" style="color:var(--ink)">💳 Deposit Required</p>
-                            <p class="text-sm mt-1 text-slate-600">
-                                A $__ deposit is required to secure your booking.
-                                This goes toward your total.
-                            </p>
-                        </div>
-
-                        <!-- Note 2 — cancellation -->
-                        <!-- TODO: Update cancellation window to match your policies page -->
-                        <div class="info-banner">
-                            <p class="text-sm font-bold" style="color:var(--ink)">⏱ Cancellation Policy</p>
-                            <p class="text-sm mt-1 text-slate-600">
-                                Please cancel or reschedule at least __ hours in advance.
-                                See full <a href="policies.html" class="underline font-bold" style="color:var(--ink)">policies page</a>.
-                            </p>
-                        </div>
-
-                        <!-- Note 3 — payment methods -->
-                        <!-- TODO: Add your accepted payment methods -->
-                        <div class="info-banner">
-                            <p class="text-sm font-bold" style="color:var(--ink)">💰 Payment Methods</p>
-                            <p class="text-sm mt-1 text-slate-600">
-                                Accepted: Cash, Venmo, CashApp — __.<br>
-                                Payment due at time of service.
-                            </p>
-                        </div>
-
-                    </div>
-                </div><!-- /notes -->
-
-            </div><!-- /add-ons + notes grid -->
-
-        </div>
-    </section><!-- /lash section -->
-
-
-    <!-- ═══════════════════════════════════════════════════════════
-         FAQ STRIP — quick answers to common pricing questions
-         TODO: Edit Q&A text to match your actual policies
-    ════════════════════════════════════════════════════════════ -->
-    <section class="py-20" style="background:var(--sky)">
-        <div class="max-w-4xl mx-auto px-6 lg:px-8">
-
-            <div class="reveal mb-12 text-center">
-                <div class="section-pill mx-auto">FAQ</div>
-                <div class="accent-bar mx-auto"></div>
-                <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,6vw,72px); line-height:.9; color:var(--ink)">
-                    QUICK ANSWERS
-                </h2>
+                </div>
             </div>
 
-            <!-- FAQ items — each one is a simple details/summary accordion -->
-            <!-- TODO: Add or remove questions as needed -->
-            <div class="space-y-4 reveal">
+        </div>
+    </section>
 
-                <details class="bg-white rounded-2xl overflow-hidden border group" style="border-color:var(--sand)">
-                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-slate-50 transition-colors">
-                        <!-- TODO: Edit question -->
+    <!-- ══════════════════════════════════════ FAQ -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-6 lg:px-8">
+            <div class="reveal mb-10">
+                <p class="text-xs font-black tracking-[.25em] uppercase mb-2" style="color:var(--ink)">FAQ</p>
+                <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(42px,7vw,80px); line-height:.9; color:var(--ink)">QUICK ANSWERS</h2>
+            </div>
+
+            <div class="space-y-3 reveal">
+
+                <details class="bg-slate-50 rounded-2xl border-2 group overflow-hidden" style="border-color:#eceade">
+                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-[#f5f3ee] transition-colors">
                         Do you require a deposit to book?
-                        <svg class="w-5 h-5 shrink-0 transition-transform group-open:rotate-180" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                        <svg class="chevron w-5 h-5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </summary>
-                    <!-- TODO: Edit answer -->
                     <p class="px-6 pb-5 text-sm text-slate-500 leading-relaxed">
-                        Yes — a $__ deposit is required at booking to hold your slot.
-                        The deposit is deducted from your final total on the day of service.
+                        Yes — a $__ deposit is required at booking to hold your slot. It's deducted from your final total on the day of service.
                     </p>
                 </details>
 
-                <details class="bg-white rounded-2xl overflow-hidden border group" style="border-color:var(--sand)">
-                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-slate-50 transition-colors">
-                        <!-- TODO: Edit question -->
+                <details class="bg-slate-50 rounded-2xl border-2 group overflow-hidden" style="border-color:#eceade">
+                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-[#f5f3ee] transition-colors">
                         What payment methods do you accept?
-                        <svg class="w-5 h-5 shrink-0 transition-transform group-open:rotate-180" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                        <svg class="chevron w-5 h-5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </summary>
-                    <!-- TODO: Edit answer -->
                     <p class="px-6 pb-5 text-sm text-slate-500 leading-relaxed">
-                        I currently accept Cash, Venmo, and CashApp.
-                        Payment is due at the time of service.
+                        Cash, Venmo, and CashApp. Payment is due at the time of service.
                     </p>
                 </details>
 
-                <details class="bg-white rounded-2xl overflow-hidden border group" style="border-color:var(--sand)">
-                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-slate-50 transition-colors">
-                        <!-- TODO: Edit question -->
+                <details class="bg-slate-50 rounded-2xl border-2 group overflow-hidden" style="border-color:#eceade">
+                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-[#f5f3ee] transition-colors">
                         How do I book a session?
-                        <svg class="w-5 h-5 shrink-0 transition-transform group-open:rotate-180" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                        <svg class="chevron w-5 h-5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </summary>
-                    <!-- TODO: Edit answer / add booking link or DM handle -->
                     <p class="px-6 pb-5 text-sm text-slate-500 leading-relaxed">
-                        DM on Instagram or email hello@envylashes.com with your preferred
-                        service, date, and any questions. I'll confirm availability and
-                        send over the deposit info to lock you in.
+                        DM on Instagram or use the contact form. Share your service, preferred date, and any questions — I'll confirm availability and send deposit info to lock you in.
                     </p>
                 </details>
 
-                <details class="bg-white rounded-2xl overflow-hidden border group" style="border-color:var(--sand)">
-                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-slate-50 transition-colors">
-                        <!-- TODO: Edit question -->
+                <details class="bg-slate-50 rounded-2xl border-2 group overflow-hidden" style="border-color:#eceade">
+                    <summary class="flex items-center justify-between px-6 py-5 cursor-pointer font-bold text-slate-900 select-none hover:bg-[#f5f3ee] transition-colors">
                         Can I request a custom quote?
-                        <svg class="w-5 h-5 shrink-0 transition-transform group-open:rotate-180" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-                        </svg>
+                        <svg class="chevron w-5 h-5 shrink-0" style="color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                     </summary>
-                    <!-- TODO: Edit answer -->
                     <p class="px-6 pb-5 text-sm text-slate-500 leading-relaxed">
-                        Absolutely. Larger events, multi-hour shoots, team packages,
-                        or anything outside these tiers — just reach out and we'll
-                        put together something that works for your budget.
+                        Absolutely. Larger events, multi-hour shoots, or team packages — just reach out and we'll put something together that works for your budget.
                     </p>
                 </details>
 
-            </div><!-- /faq -->
+            </div>
         </div>
     </section>
 
 
 </main>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     FOOTER — identical to mywork.html
-════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════ FOOTER -->
 <footer class="bg-white pt-20 pb-10 border-t border-slate-100">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-
-            <!-- Brand blurb + social -->
             <div class="space-y-6">
-                <a href="index.html" class="text-3xl font-extrabold text-slate-900 tracking-tighter">
-                    VX.<span style="color:var(--ink)">Alex</span>
-                </a>
-                <p class="text-slate-500 leading-relaxed">
-                    Elevating beauty standards in Worcester through precision artistry
-                    and conscious craftsmanship. Every lash, a masterpiece.
-                </p>
+                <a href="index.html" class="text-3xl font-extrabold text-slate-900 tracking-tighter">VX.<span style="color:var(--ink)">Alex</span></a>
+                <p class="text-slate-500 leading-relaxed">Professional photography for sports, events, and life's most important moments. Based in Worcester, MA.</p>
                 <div class="flex space-x-4">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                       class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#1E1408] transition-all">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849s-.011 3.584-.069 4.849c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.849-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849s.012-3.584.07-4.849c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.337 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.337-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.28-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-[#1E1408] hover:text-white transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849s-.011 3.584-.069 4.849c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.849-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849s.012-3.584.07-4.849c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.337 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.337-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.689.072-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.28-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
-                       class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#1E1408] transition-all">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
-                        </svg>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-[#1E1408] hover:text-white transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
                     </a>
                 </div>
             </div>
-
-            <!-- Nav -->
             <div>
                 <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Navigation</h4>
                 <ul class="space-y-4 text-slate-500 font-medium">
-                    <li><a href="index.html"    class="hover:text-[#1E1408] transition-colors">Home</a></li>
-                    <li><a href="mywork.html"   class="hover:text-[#1E1408] transition-colors">Gallery</a></li>
+                    <li><a href="index.html" class="hover:text-[#1E1408] transition-colors">Home</a></li>
+                    <li><a href="mywork.html" class="hover:text-[#1E1408] transition-colors">Gallery</a></li>
                     <li><a href="policies.html" class="hover:text-[#1E1408] transition-colors">Policies & Hours</a></li>
-                    <li><a href="prices.html"   class="font-bold" style="color:var(--ink)">Pricing</a></li>
+                    <li><a href="prices.html" class="font-bold" style="color:var(--ink)">Pricing</a></li>
                 </ul>
             </div>
-
-            <!-- Services list -->
             <div>
                 <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Services</h4>
                 <ul class="space-y-4 text-slate-500 font-medium">
-                    <li>Classic Full Set</li>
-                    <li>Hybrid Extensions</li>
-                    <li>Volume Glamour</li>
-                    <li>Lash Lift & Tint</li>
+                    <li>Sports Photography</li>
+                    <li>Events Photography</li>
+                    <li>Portrait Sessions</li>
+                    <li>Custom Packages</li>
                 </ul>
             </div>
-
-            <!-- Contact -->
             <div>
-                <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Visit Us</h4>
+                <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Contact</h4>
                 <ul class="space-y-4 text-slate-500 font-medium">
                     <li class="flex items-start gap-3">
-                        <svg class="w-5 h-6 shrink-0 mt-0.5" style="color:var(--ink)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
+                        <svg class="w-5 h-6 shrink-0 mt-0.5" style="color:var(--ink)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         Worcester, Massachusetts
                     </li>
                     <li class="flex items-start gap-3">
-                        <svg class="w-5 h-6 shrink-0 mt-0.5" style="color:var(--ink)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                        hello@envylashes.com
+                        <svg class="w-5 h-6 shrink-0 mt-0.5" style="color:var(--ink)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        hello@vxalex.com
                     </li>
                     <li class="flex items-start gap-3">
-                        <svg class="w-5 h-6 shrink-0 mt-0.5" style="color:var(--ink)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
+                        <svg class="w-5 h-6 shrink-0 mt-0.5" style="color:var(--ink)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         By Appointment Only
                     </li>
                 </ul>
             </div>
-        </div><!-- /footer grid -->
-
-        <!-- Footer bottom bar -->
+        </div>
         <div class="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-md font-bold" style="color:var(--ink)">© 2026 Envy Lashes · VX.Alex. All rights reserved.</p>
+            <p class="text-md font-bold" style="color:var(--ink)">© 2026 VX.Alex Photography. All rights reserved.</p>
             <div class="flex items-center gap-8 text-sm font-bold uppercase tracking-widest" style="color:var(--ink)">
                 <span>Built in Worcester</span>
                 <a href="policies.html" class="hover:opacity-70 transition-opacity">Policies</a>
@@ -1005,24 +426,44 @@
         </div>
     </div>
 </footer>
-<!-- /FOOTER -->
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     SCROLL REVEAL JS — same observer setup as index + mywork
-════════════════════════════════════════════════════════════ -->
 <script>
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                revealObserver.unobserve(entry.target); // fire once, then detach
-            }
+    // Mobile nav
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeBtn     = document.getElementById('close-btn');
+    const drawer       = document.getElementById('mobile-drawer');
+    const overlay      = document.getElementById('overlay');
+    const barTop       = document.getElementById('bar-top');
+    const barMid       = document.getElementById('bar-mid');
+    const barBot       = document.getElementById('bar-bot');
+
+    function openMenu() {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('opacity-0','pointer-events-none');
+        overlay.classList.add('opacity-100','pointer-events-auto');
+        barTop.style.transform = 'translateY(8px) rotate(45deg)';
+        barMid.style.opacity   = '0';
+        barBot.style.transform = 'translateY(-8px) rotate(-45deg)';
+    }
+    function closeMenu() {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.add('opacity-0','pointer-events-none');
+        overlay.classList.remove('opacity-100','pointer-events-auto');
+        barTop.style.transform = '';
+        barMid.style.opacity   = '';
+        barBot.style.transform = '';
+    }
+    hamburgerBtn.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
         });
     }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>

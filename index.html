@@ -9,7 +9,7 @@
     <style>
         html { scroll-behavior: smooth; }
 
-        /* Hamburger menu animation */
+        Hamburger menu animation
         #menu-toggle:checked ~ div .bar-top    { transform: translateY(8px) rotate(45deg); }
         #menu-toggle:checked ~ div .bar-mid    { opacity: 0; transform: scaleX(0); }
         #menu-toggle:checked ~ div .bar-bot    { transform: translateY(-8px) rotate(-45deg); }
@@ -77,25 +77,22 @@
     <header class="bg-white/95 backdrop-blur-md fixed w-full top-0 z-50 border-b border-gray-100 shadow-sm">
         <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-8">
 
-            <!-- Logo -->
             <a href="index.html" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tighter shrink-0 hover:opacity-80 transition-opacity">
                 VX.<span class="text-[#1E1408]">Alex</span>
             </a>
 
-            <!-- Desktop nav -->
             <div class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-slate-600">
                 <a href="index.html" class="text-[#1E1408]">Home</a>
-                <a href="index.html#reviews" class="hover-[#1E1408] transition-colors">Reviews</a>
-                <a href="mywork.html" class="hover-[#1E1408] transition-colors">My Work</a>
-                <a href="policies.html" class="hover-[#1E1408] transition-colors">Policies & Hours</a>
-                <a href="prices.html" class="px-5 py-2.5 bg-[#1E1408] text-white rounded-xl hover:bg-#140D05 transition-all font-bold">
-                    Book Now
+                <a href="index.html#reviews" class="hover:text-[#1E1408] transition-colors">Reviews</a>
+                <a href="mywork.html" class="hover:text-[#1E1408] transition-colors">My Work</a>
+                <a href="prices.html" class="hover:text-[#1E1408] transition-colors">Prices</a>
+                <a href="contactPage.html" class="px-5 py-2.5 bg-[#1E1408] text-white rounded-xl hover:bg-[#140D05] transition-all font-bold">
+                    Contact Me
                 </a>
             </div>
 
-            <!-- Mobile hamburger toggle -->
             <input type="checkbox" id="menu-toggle" class="hidden peer">
-            <label for="menu-toggle" class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-slate-50 rounded-xl transition-colors z-[70] relative">
+            <label for="menu-toggle" class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-slate-50 rounded-xl transition-all peer-checked:opacity-0 peer-checked:pointer-events-none z-40 relative">
                 <div class="flex flex-col gap-[6px] w-7">
                     <span class="bar-top block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
                     <span class="bar-mid block h-[2.5px] w-full bg-slate-900 rounded-full"></span>
@@ -103,10 +100,9 @@
                 </div>
             </label>
 
-            <!-- Mobile drawer -->
             <div class="fixed inset-y-0 right-0 w-[300px] bg-white shadow-2xl transition-transform duration-300 transform translate-x-full peer-checked:translate-x-0 lg:hidden z-[60] p-8 flex flex-col">
                 <div class="flex justify-end mb-10">
-                    <label for="menu-toggle" class="cursor-pointer p-2 text-slate-400 hover-[#1E1408] transition-colors">
+                    <label for="menu-toggle" class="cursor-pointer p-2 text-slate-400 hover:text-[#1E1408] transition-colors">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                         </svg>
@@ -114,19 +110,18 @@
                 </div>
                 <ul class="flex flex-col space-y-6 text-xl font-bold text-slate-800">
                     <li><a href="index.html" class="text-[#1E1408] block">Home</a></li>
-                    <li><a href="index.html#reviews" class="block hover-[#1E1408] transition-colors">Reviews</a></li>
-                    <li><a href="mywork.html" class="block hover-[#1E1408] transition-colors">My Work</a></li>
-                    <li><a href="policies.html" class="block hover-[#1E1408] transition-colors">Policies & Hours</a></li>
-                    <li><a href="prices.html" class="block hover-[#1E1408] transition-colors">Pricing</a></li>
+                    <li><a href="index.html#reviews" class="block hover:text-[#1E1408] transition-colors">Reviews</a></li>
+                    <li><a href="mywork.html" class="block hover:text-[#1E1408] transition-colors">My Work</a></li>
+                    <li><a href="policies.html" class="block hover:text-[#1E1408] transition-colors">Policies & Hours</a></li>
+                    <li><a href="prices.html" class="block hover:text-[#1E1408] transition-colors">Pricing</a></li>
                 </ul>
                 <div class="mt-auto pt-10 border-t border-slate-100">
-                    <a href="prices.html" class="block w-full text-center px-6 bg-[#1E1408] text-white rounded-2xl font-bold shadow-lg shadow-[#DDD9C4] hover:bg-#140D05 transition-all">
+                    <a href="prices.html" class="block w-full text-center px-6 py-4 bg-[#1E1408] text-white rounded-2xl font-bold shadow-lg shadow-[#DDD9C4] hover:bg-[#140D05] transition-all">
                         Contact Me
                     </a>
                 </div>
             </div>
 
-            <!-- Overlay -->
             <label for="menu-toggle" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 peer-checked:opacity-100 peer-checked:pointer-events-auto lg:hidden z-[55]"></label>
         </nav>
     </header>
@@ -642,18 +637,18 @@
     </footer>
 
     <!-- Scroll reveal JS -->
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
+   <script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
