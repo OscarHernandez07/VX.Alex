@@ -6,6 +6,7 @@
     <meta name="description" content="Contact VX.Alex — Worcester's premier photography studio. Book a session, ask a question, or just say hello.">
     <title>Contact | VX.Alex Photography</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js" defer></script>
     <style>
         html { scroll-behavior: smooth; }
 
@@ -118,66 +119,137 @@
             background: #1E1408;
             border-radius: 2px;
         }
+
+        /* Stat counter pulse */
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+        .stat-pulse { animation: gentle-pulse 3s ease-in-out infinite; }
+
+        /* Floating badge */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-badge { animation: float 4s ease-in-out infinite; }
+
+        /* Star shimmer */
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .star-shimmer { animation: shimmer 2s ease-in-out infinite; }
+
+        /* Subtle grain overlay */
+        .grain-overlay {
+            position: relative;
+        }
+        .grain-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+            .bar-top, .bar-mid, .bar-bot {
+            transition: transform 0.3s ease, opacity 0.2s ease;
+            transform-origin: center;
+            }
+
+            #menu-btn.open .bar-top { transform: translateY(8px) rotate(45deg); }
+            #menu-btn.open .bar-mid { opacity: 0; transform: scaleX(0); }
+            #menu-btn.open .bar-bot { transform: translateY(-8px) rotate(-45deg); }
+            
+            #side-panel {
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                transform: translateX(100%);
+            }
+            #side-panel.open { transform: translateX(0); }
+            
+            #overlay {
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+            #overlay.open { opacity: 1; pointer-events: all; }
+            
+            #nav-links a:hover { color: #1E1408; }
+
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900 antialiased">
 
     <!-- ═══════════════════════════════════════════ HEADER -->
+    <!-- ═══════════════════════════════════════════════════ HEADER -->
     <header class="bg-white/95 backdrop-blur-md fixed w-full top-0 z-50 border-b border-gray-100 shadow-sm">
-        <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-8">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-8">
+ 
+    <!-- Logo -->
+    <a href="index.html" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tighter shrink-0 hover:opacity-80 transition-opacity">
+      VX.<span class="text-[#1E1408]">Alex</span>
+    </a>
+ 
+    <!-- Desktop nav -->
+    <div id="nav-links" class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-slate-600">
+      <a href="index.html" class="text-[#1E1408] transition-colors">Home</a>
+      <a href="index.html#reviews" class="hover:text-[#1E1408] transition-colors">Reviews</a>
+      <a href="mywork.html" class="hover:text-[#1E1408] transition-colors">My Work</a>
+      <a href="prices.html" class="hover:text-[#1E1408] transition-colors">Prices</a>
+      <a href="contactPage.html" class="px-5 py-2.5 bg-[#1E1408] text-white rounded-xl hover:bg-[#140D05] transition-all font-bold">
+        Contact Me
+      </a>
+    </div>
+ 
+    <!-- Hamburger button -->
+    <button
+      id="menu-btn"
+      aria-label="Open menu"
+      class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-slate-50 rounded-xl transition-all flex flex-col gap-[6px] w-11 h-11 items-center justify-center"
+    >
+      <span class="bar-top block h-[2.5px] w-7 bg-slate-900 rounded-full"></span>
+      <span class="bar-mid block h-[2.5px] w-7 bg-slate-900 rounded-full"></span>
+      <span class="bar-bot block h-[2.5px] w-7 bg-slate-900 rounded-full"></span>
+    </button>
+ 
+  </nav>
+</header>
 
-            <a href="index.html" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tighter shrink-0 hover:opacity-80 transition-opacity">
-                VX.<span class="text-[#1E1408]">Alex</span>
-            </a>
+<!-- Overlay -->
+<div id="overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[55] lg:hidden"></div>
+ 
+<!-- Side panel -->
+<div id="side-panel" class="fixed inset-y-0 right-0 w-[300px] bg-white shadow-2xl z-[60] p-8 flex flex-col lg:hidden">
+ 
+  <!-- Close button -->
+  <div class="flex justify-end mb-10">
+    <button id="close-btn" aria-label="Close menu" class="p-2 text-slate-400 hover:text-[#1E1408] transition-colors">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+ 
+  <!-- Nav links -->
+  <ul class="flex flex-col space-y-6 text-xl font-bold text-slate-800">
+    <li><a href="index.html" class="text-[#1E1408] block">Home</a></li>
+    <li><a href="index.html#reviews" class="block hover:text-[#1E1408] transition-colors">Reviews</a></li>
+    <li><a href="mywork.html" class="block hover:text-[#1E1408] transition-colors">My Work</a></li>
+    <li><a href="prices.html" class="block hover:text-[#1E1408] transition-colors">Prices</a></li>
+  </ul>
+ 
+  <!-- CTA -->
+  <div class="mt-auto pt-10 border-t border-slate-100">
+    <a href="contactPage.html" class="block w-full text-center px-6 py-4 bg-[#1E1408] text-white rounded-2xl font-bold shadow-lg hover:bg-[#140D05] transition-all">
+      Contact Me
+    </a>
+  </div>
 
-            <!-- Desktop nav -->
-            <div class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-slate-600">
-                <a href="index.html" class="hover:text-[#1E1408] transition-colors">Home</a>
-                <a href="index.html#reviews" class="hover:text-[#1E1408] transition-colors">Reviews</a>
-                <a href="mywork.html" class="hover:text-[#1E1408] transition-colors">My Work</a>
-                <a href="prices.html" class="hover:text-[#1E1408] transition-colors">Prices</a>
-                <a href="contactPage.html" class="px-5 py-2.5 bg-[#1E1408] text-white rounded-xl hover:bg-[#140D05] transition-all font-bold">
-                    Contact Me
-                </a>
-            </div>
+</div>
 
-            <!-- Mobile hamburger -->
-            <button id="hamburger-btn" class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-slate-50 rounded-xl transition-all z-40 relative" aria-label="Open menu">
-                <div class="flex flex-col gap-[6px] w-7">
-                    <span class="block h-[2.5px] w-full bg-slate-900 rounded-full transition-all duration-300 origin-center" id="bar-top"></span>
-                    <span class="block h-[2.5px] w-full bg-slate-900 rounded-full transition-all duration-300" id="bar-mid"></span>
-                    <span class="block h-[2.5px] w-full bg-slate-900 rounded-full transition-all duration-300 origin-center" id="bar-bot"></span>
-                </div>
-            </button>
-
-            <!-- Mobile drawer -->
-            <div id="mobile-drawer" class="fixed inset-y-0 right-0 w-[300px] bg-white shadow-2xl transition-transform duration-300 transform translate-x-full lg:hidden z-[60] p-8 flex flex-col">
-                <div class="flex justify-end mb-10">
-                    <button id="close-btn" class="cursor-pointer p-2 text-slate-400 hover:text-[#1E1408] transition-colors" aria-label="Close menu">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-                <ul class="flex flex-col space-y-6 text-xl font-bold text-slate-800">
-                    <li><a href="index.html" class="block hover:text-[#1E1408] transition-colors">Home</a></li>
-                    <li><a href="index.html#reviews" class="block hover:text-[#1E1408] transition-colors">Reviews</a></li>
-                    <li><a href="mywork.html" class="block hover:text-[#1E1408] transition-colors">My Work</a></li>
-                    <li><a href="policies.html" class="block hover:text-[#1E1408] transition-colors">Policies & Hours</a></li>
-                    <li><a href="prices.html" class="block hover:text-[#1E1408] transition-colors">Pricing</a></li>
-                    <li><a href="contact.html" class="block text-[#1E1408]">Contact</a></li>
-                </ul>
-                <div class="mt-auto pt-10 border-t border-slate-100">
-                    <a href="prices.html" class="block w-full text-center px-6 py-4 bg-[#1E1408] text-white rounded-2xl font-bold shadow-lg hover:bg-[#140D05] transition-all">
-                        Book Now
-                    </a>
-                </div>
-            </div>
-
-            <!-- Overlay -->
-            <div id="overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden z-[55]"></div>
-        </nav>
-    </header>
 
     <main class="pt-[72px]">
 
@@ -206,19 +278,18 @@
         </section>
 
         <!-- ═══════════════════════════════════════════ CONTACT GRID -->
-        <section class="py-20 bg-white">
+        <section class="py-20 pb-4 bg-white">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="grid lg:grid-cols-5 gap-12 items-start">
 
                     <!-- ── LEFT: FORM (3 cols) -->
                     <div class="lg:col-span-3 reveal">
                         <div class="mb-8">
-                            <div class="deco-line mb-4"></div>
                             <p class="text-xs font-bold tracking-[0.3em] uppercase text-[#1E1408] mb-2">Send a Message</p>
                             <h2 class="text-4xl md:text-5xl font-extrabold text-slate-950 tracking-tighter leading-tight">
-                                Book a Session<br/>or Say Hello
+                                Book a Session
                             </h2>
-                            <p class="text-slate-500 mt-3 text-base leading-relaxed max-w-md">
+                            <p class="text-slate-500 mt-3 text-base leading-relaxed max-w-lg">
                                 Fill out the form below and I'll get back to you within 24 hours.
                             </p>
                         </div>
@@ -398,7 +469,7 @@
     </main>
 
     <!-- ═══════════════════════════════════════════ FOOTER -->
-    <footer class="bg-white pt-20 pb-10 border-t border-slate-100">
+    <footer class="bg-white pt-10 pb-10 border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-6">
@@ -417,13 +488,12 @@
                         </a>
                     </div>
                 </div>
-                <div>
+                <div class="pl-0 sm:pl-8">
                     <h4 class="text-slate-900 font-bold mb-6 uppercase tracking-widest text-sm">Navigation</h4>
                     <ul class="space-y-4 text-slate-500 font-medium">
                         <li><a href="index.html" class="hover:text-[#1E1408] transition-colors">Home</a></li>
                         <li><a href="mywork.html" class="hover:text-[#1E1408] transition-colors">Gallery</a></li>
-                        <li><a href="policies.html" class="hover:text-[#1E1408] transition-colors">Policies & Hours</a></li>
-                        <li><a href="prices.html" class="hover:text-[#1E1408] transition-colors">Pricing</a></li>
+                        <li><a href="prices.html" class="hover:text-[#1E1408] transition-colors">Prices</a></li>
                         <li><a href="contact.html" class="text-[#1E1408] font-bold">Contact</a></li>
                     </ul>
                 </div>
@@ -465,47 +535,7 @@
         </div>
     </footer>
 
-    <script>
-        // ── Mobile nav
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const closeBtn     = document.getElementById('close-btn');
-        const drawer       = document.getElementById('mobile-drawer');
-        const overlay      = document.getElementById('overlay');
-        const barTop       = document.getElementById('bar-top');
-        const barMid       = document.getElementById('bar-mid');
-        const barBot       = document.getElementById('bar-bot');
-
-        function openMenu() {
-            drawer.classList.remove('translate-x-full');
-            overlay.classList.remove('opacity-0', 'pointer-events-none');
-            overlay.classList.add('opacity-100', 'pointer-events-auto');
-            barTop.style.transform = 'translateY(8px) rotate(45deg)';
-            barMid.style.opacity   = '0';
-            barBot.style.transform = 'translateY(-8px) rotate(-45deg)';
-        }
-        function closeMenu() {
-            drawer.classList.add('translate-x-full');
-            overlay.classList.add('opacity-0', 'pointer-events-none');
-            overlay.classList.remove('opacity-100', 'pointer-events-auto');
-            barTop.style.transform = '';
-            barMid.style.opacity   = '';
-            barBot.style.transform = '';
-        }
-        hamburgerBtn.addEventListener('click', openMenu);
-        closeBtn.addEventListener('click', closeMenu);
-        overlay.addEventListener('click', closeMenu);
-
-        // ── Scroll reveal
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
+    <script>        
         // ── Form submit (demo)
         const form       = document.getElementById('contact-form');
         const successMsg = document.getElementById('success-msg');
@@ -529,6 +559,34 @@
                 form.style.display = 'none';
                 successMsg.classList.add('show');
             }, 300);
+        });
+
+        const menuBtn  = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const panel    = document.getElementById('side-panel');
+        const overlay  = document.getElementById('overlay');
+        
+        function openMenu() {
+            panel.classList.add('open');
+            overlay.classList.add('open');
+            menuBtn.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMenu() {
+            panel.classList.remove('open');
+            overlay.classList.remove('open');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+        
+        // Close menu on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) closeMenu();
         });
     </script>
 </body>
